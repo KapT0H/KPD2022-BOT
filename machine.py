@@ -39,6 +39,7 @@ async def valute(message: types.Message, state: FSMContext):
         with sqlite3.connect('data.db', timeout=60) as connect:
             cursor = connect.cursor()
             cursor.execute("UPDATE settings SET valutes = ? WHERE uid = ? ", (data["valute"] ,data['uid'],))
+        await state.finish()
 
 @dp.message_handler(state=Greeting.time)  # Тут уже идёт обработка машиной состояний для смены времени
 async def process_name(message: types.Message, state: FSMContext):
